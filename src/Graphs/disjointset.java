@@ -89,8 +89,70 @@ public class disjointset {
         return size-cols.size()-rows.size();
 
     }
+    public static int countComponents(int[] nums, int k) {
+        HashMap<Integer,Integer> mp=new HashMap<>();
+        DisjointSet ds=new DisjointSet(nums.length);
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i++){
+            mp.put(nums[i],i);
+        }
+        boolean [] visit=new boolean[nums.length];
+        int [] map=new int[k+1];
+        Arrays.fill(map,-1);
+        for(int i=0;i<nums.length;i++){
+            int st=2;
+            int ele=nums[i];
+            if(visit[i]) continue;
+            while(ele*st<=k){
+                int multiple=ele*st;
+                if(mp.containsKey(multiple)){
+                    int idx=mp.get(multiple);
+                    ds.unionBySize(i,idx);
+                    visit[i]=true;
+                }
+                else{
+                    if(map[multiple]==-1) map[multiple]=i;
+                    else{
+                        ds.unionBySize(i,map[multiple]);
+                    }
+                }
+                st++;
+            }
+        }
+        int count=0;
+        for(int i=0;i<nums.length;i++){
+            if(ds.findParent(i)==i){
+                count++;
+            }
+        }
+        System.out.println(ds.parent);
+        return count;
+
+    }
+    public static  int f(String s){
+        int n=s.length();
+        int count=0;
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)=='1'){
+                count++;
+            }
+        }
+        return count;
+    }
     public static void main(String[] args) {
-       int [][] stones={{0,0},{0,1},{1,0},{1,2},{2,1},{2,2}};
-        System.out.println(maxRemove(stones,6));
+        Scanner sc=new Scanner(System.in);
+        int test=sc.nextInt();
+        for(int k=0;k<test;k++){
+            int n=sc.nextInt();
+            int l=sc.nextInt();
+            int r=sc.nextInt();
+
+            int [] arr=new int[n];
+
+            for(int i=0;i<n;i++){
+                arr[i]=sc.nextInt();
+            }
+            
+        }
     }
 }
