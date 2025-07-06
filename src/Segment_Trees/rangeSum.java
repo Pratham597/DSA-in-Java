@@ -13,6 +13,7 @@ public class rangeSum {
         private void helperBuild(int st,int end,int idx){
             if(st==end){
                 segment[idx]=arr[st];
+                return;
             }
             int  mid=st+(end-st)/2;
             helperBuild(st,mid,2*idx+1);
@@ -38,6 +39,7 @@ public class rangeSum {
         public void update(int st,int end,int pt,int val,int idx,int [] segment){
             if(st==end){
                 segment[idx]=val;
+                return;
             }
             int mid=st+(end-st)/2;
             if(pt<=mid) {
